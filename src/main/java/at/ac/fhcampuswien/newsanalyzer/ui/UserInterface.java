@@ -2,6 +2,9 @@ package at.ac.fhcampuswien.newsanalyzer.ui;
 
 
 import at.ac.fhcampuswien.newsanalyzer.ctrl.Controller;
+import at.ac.fhcampuswien.newsapi.enums.Category;
+import at.ac.fhcampuswien.newsapi.enums.Country;
+import at.ac.fhcampuswien.newsapi.enums.Endpoint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,15 +17,16 @@ public class UserInterface
 	public void getDataFromCtrl1(){
 		System.out.println("ABC");
 
-		ctrl.process();
+		ctrl.process("corona", Endpoint.TOP_HEADLINES, Country.at, Category.health);
 	}
 
 	public void getDataFromCtrl2(){
-		// TODO implement me
+		ctrl.process("krypto", Endpoint.TOP_HEADLINES, Country.de, Category.technology);
+
 	}
 
 	public void getDataFromCtrl3(){
-		// TODO implement me
+		ctrl.process("", Endpoint.TOP_HEADLINES, Country.it, Category.science);
 	}
 	
 	public void getDataForCustomInput() {
@@ -33,9 +37,9 @@ public class UserInterface
 	public void start() {
 		Menu<Runnable> menu = new Menu<>("User Interface");
 		menu.setTitle("Wählen Sie aus:");
-		menu.insert("a", "Choice ABC", this::getDataFromCtrl1);
-		menu.insert("b", "Choice DEF", this::getDataFromCtrl2);
-		menu.insert("c", "Choice 3", this::getDataFromCtrl3);
+		menu.insert("a", "Choice news article from austria about corona", this::getDataFromCtrl1);
+		menu.insert("b", "Choice news article from germany about crypto", this::getDataFromCtrl2);
+		menu.insert("c", "Choice news article from italy about science", this::getDataFromCtrl3);
 		menu.insert("d", "Choice User Input:",this::getDataForCustomInput);
 		menu.insert("q", "Quit", null);
 		Runnable choice;
