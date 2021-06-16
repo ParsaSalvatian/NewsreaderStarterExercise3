@@ -60,15 +60,15 @@ public class Controller {
 	public void analyze2(List<Article> a){
 	}
 
-
+	//Mit Zeynep,Nur und Greta gemacht
 	public void analyze3(List<Article> a){
 		Article names = a.stream().filter(article -> article.getAuthor()!=null).sorted(Comparator.comparing(article -> article.getAuthor().length())).findFirst().orElse(new Article());
 		System.out.println(names.getAuthor());
 	}
-
+	//
 
 	public void analyze4(List<Article> a){
-		a.stream().sorted(Comparator.comparingInt(article ->article.getTitle().length())).collect(Collectors.toList());
+		//a.stream().sorted(Comparator.comparingInt(article ->article.getTitle().length())).collect(Collectors.toList());
 
 	}
 

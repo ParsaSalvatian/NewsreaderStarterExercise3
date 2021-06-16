@@ -148,11 +148,12 @@ public class NewsApi {
     protected String buildURL() throws NewsApiException {
         // TODO ErrorHandling
 
+        //Mit Zeynep,Nur und Greta gemacht
         if(NEWS_API_URL.equals("")) throw new NewsApiException("Write URL!");
         if(getEndpoint().getValue().equals("")) throw new NewsApiException("Write Endpoint!");
         if(getQ().equals("")) throw new NewsApiException("Write Q!");
         if(getApiKey().equals("")) throw new NewsApiException("Write ApiKey");
-
+        //
         String urlbase = String.format(NEWS_API_URL,getEndpoint().getValue(),getQ(),getApiKey());
         StringBuilder sb = new StringBuilder(urlbase);
 
