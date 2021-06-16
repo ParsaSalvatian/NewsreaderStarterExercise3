@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.newsapi;
 
+import at.ac.fhcampuswien.newsanalyzer.Exception.NewsApiException;
 import at.ac.fhcampuswien.newsapi.beans.Article;
 import at.ac.fhcampuswien.newsapi.beans.NewsResponse;
 import at.ac.fhcampuswien.newsapi.enums.Category;
@@ -12,21 +13,24 @@ public class NewsAPIExample {
 
     public static final String APIKEY = "86660de6b43c44a4b89893a8f032f407";    //TODO add your api key
 
-    public static void main(String[] args){
+    public static void main(String[] args)  {
 
-        NewsApi newsApi = new NewsApiBuilder()
-                .setApiKey(APIKEY)
-                .setQ("corona")
-                .setEndPoint(Endpoint.TOP_HEADLINES)// example of how to use enums
-                .setSourceCountry(Country.at)       // example of how to use enums
-                .setSourceCategory(Category.health) // example of how to use enums
-                .createNewsApi();
+        try {
+            NewsApi newsApi = new NewsApiBuilder()
+                    .setApiKey(APIKEY)
+                    .setQ("corona")
+                    .setEndPoint(Endpoint.TOP_HEADLINES)// example of how to use enums
+                    .setSourceCountry(Country.at)       // example of how to use enums
+                    .setSourceCategory(Category.health) // example of how to use enums
+                    .createNewsApi();
+
 
             NewsResponse newsResponse = newsApi.getNews();
-            if(newsResponse != null){
+            if (newsResponse != null) {
                 List<Article> articles = newsResponse.getArticles();
                 articles.stream().forEach(article -> System.out.println(article.toString()));
             }
+
 
         newsApi = new NewsApiBuilder()
                 .setApiKey(APIKEY)
@@ -36,11 +40,17 @@ public class NewsAPIExample {
                 .setExcludeDomains("Lifehacker.com")
                 .createNewsApi();
 
-            newsResponse = newsApi.getNews();
+
+                    newsResponse = newsApi.getNews();
+
+
 
         if(newsResponse != null){
             List<Article> articles = newsResponse.getArticles();
             articles.stream().forEach(article -> System.out.println(article.toString()));
+        }
+        }catch (NewsApiException e){
+            System.out.println(e.getMessage());
         }
 
     }
